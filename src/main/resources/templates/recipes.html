@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">Recipes management</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>User management</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Real name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe: ${allRecipes}">
+            <td th:text="${recipe.name}">test</td>
+            <td th:text="${recipe.complexity}">I Am Nobody</td>
+            <td><a href="#" th:href="@{/recipes/edit(id=${recipe.id})}">edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
