@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
@@ -21,10 +23,47 @@ public class RecipeController {
     }
 
     @GetMapping
-    public String list(Model model) {
-        var all = recipeService.readAll();
-        model.addAttribute("allRecipes", all);
+    public String list(Model model, @RequestParam Optional<Double> price) {
+        if (price.isPresent()) {
+            var byPrice = recipeService.readByPrice(price.get());
+            model.addAttribute("allRecipes", byPrice);
+            IngredientDto recipePrice = new IngredientDto();
+            recipePrice.setId(0L);
+            recipePrice.setName("Price");
+            recipePrice.setPrice(price.get());
+            model.addAttribute("recipePrice", recipePrice);
+        } else {
+            var all = recipeService.readAll();
+            model.addAttribute("allRecipes", all);
+            IngredientDto recipePrice = new IngredientDto();
+            recipePrice.setId(0L);
+            recipePrice.setName("Price");
+            recipePrice.setPrice(0);
+            model.addAttribute("recipePrice", recipePrice);
+        }
+        model.addAttribute("recipe", new RecipeDto());
         return "recipes";
+    }
+
+
+    @PostMapping
+    public String delete(Model model, @RequestParam long id) {
+        recipeService.setCurrentRecipe(id);
+        recipeService.deleteCurrent();
+        model.addAttribute("allRecipes", recipeService.readAll());
+        IngredientDto recipePrice = new IngredientDto();
+        recipePrice.setId(0L);
+        recipePrice.setName("Price");
+        recipePrice.setPrice(0);
+        model.addAttribute("recipePrice", recipePrice);
+        model.addAttribute("recipe", new RecipeDto());
+        return "recipes";
+    }
+
+    @PostMapping("/add")
+    public String create(@ModelAttribute RecipeDto formData, Model model) {
+        recipeService.create(formData);
+        return list(model, Optional.empty());
     }
 
     @GetMapping("/edit")
@@ -43,7 +82,7 @@ public class RecipeController {
         } catch (HttpClientErrorException.NotFound e) {
             model.addAttribute("error", true);
         }
-        return list(model);
+        return list(model, Optional.empty());
     }
 
     @GetMapping("/ingredients")
@@ -74,6 +113,7 @@ public class RecipeController {
         } catch (HttpClientErrorException.NotFound e) {
             model.addAttribute("error", true);
         }
-        return list(model);
+        return list(model, Optional.empty());
     }
+
 }

@@ -48,6 +48,15 @@ public class RecipeService {
 
     public void addIngredientToRecipe(IngredientDto formData) {
         recipeClient.addIngredient(formData);
+        // TODO
+    }
+
+    public Collection<RecipeDto> readByPrice(double price) {
+        return recipeClient.readByPrice(price);
+    }
+
+    public void deleteCurrent() {
+        recipeClient.deleteCurrent();
     }
 
 //    public long createPostForCurrentUser(PostDto data) {

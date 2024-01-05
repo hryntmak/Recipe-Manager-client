@@ -4,26 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78bd9a13-94c5-4420-8889-1ebf4051719b" name="Changes" comment="Add functional recipes page and edit of recipe.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/api_client/IngredientClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/service/IngredientService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/web_ui/IngredientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/addDish.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/addIngredient.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/addIngredientsToRecipe.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/addRecipe.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/editDish.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/editIngredient.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/ingredients.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/recipeIngredients.html" afterDir="false" />
+    <list default="true" id="78bd9a13-94c5-4420-8889-1ebf4051719b" name="Changes" comment="Realize adding ingredients to the recipe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/api_client/RecipeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/api_client/RecipeClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/DishDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/DishDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/IngredientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/IngredientDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/model/RecipeDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/service/RecipeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/service/RecipeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/web_ui/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/web_ui/RecipeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addIngredientsToRecipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addIngredientsToRecipe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editRecipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editRecipe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ingredients.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ingredients.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recipeIngredients.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recipeIngredients.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recipes.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recipes.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +114,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703784587459</updated>
-      <workItem from="1703784588742" duration="29688000" />
+      <workItem from="1703784588742" duration="44070000" />
     </task>
     <task id="LOCAL-00001" summary="Add functional recipes page and edit of recipe.">
       <option name="closed" value="true" />
@@ -134,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704396173948</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Realize adding ingredients to the recipe">
+      <option name="closed" value="true" />
+      <created>1704415946320</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704415946320</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,22 +140,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add functional recipes page and edit of recipe." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add functional recipes page and edit of recipe." />
+    <MESSAGE value="Realize adding ingredients to the recipe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Realize adding ingredients to the recipe" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/cz/cvut/fit/tjv/recipe_client/web_ui/RecipeController.java</url>
-          <line>69</line>
-          <properties class="cz.cvut.fit.tjv.recipe_client.web_ui.RecipeController" method="addIngredientsSubmit">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((JdkClientHttpResponse)((DefaultConvertibleClientHttpResponse)((DefaultResponseSpec)tmp2).clientResponse).delegate).headers" custom="org.springframework.http.client.JdkClientHttpResponse,org.springframework.web.client.DefaultRestClient.DefaultResponseSpec,org.springframework.web.client.DefaultRestClient.DefaultConvertibleClientHttpResponse" />

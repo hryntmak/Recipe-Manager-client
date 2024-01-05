@@ -8,12 +8,21 @@
 <nav>
     <a href="/">Welcome</a> |
     <a href="/recipes">Recipes management</a>
+    <a href="/ingredients">Ingredients management</a>
+    <a href="/dishes">Dishes management</a>
 </nav>
 <main>
     <div th:if="${error}">
         <span>ERROR</span>
     </div>
     <h1>User management</h1>
+    <form method="get" th:action="@{/recipes(price=${recipePrice.price})}">
+        <div>
+            <label for="Price">Show recipes with price lower than: </label>
+            <input th:field="*{recipePrice.price}" type="number" id="Price" value="I Am Nobody"/>
+        </div>
+        <input type="submit" value="Show recipes"/>
+    </form>
     <table>
         <thead>
         <tr>
@@ -32,9 +41,30 @@
             <td th:if="${recipe.getDish()} == null"></td>
             <td><a href="#" th:href="@{/recipes/ingredients(id=${recipe.id})}">ingredients</a></td>
             <td><a href="#" th:href="@{/recipes/edit(id=${recipe.id})}">edit</a></td>
+            <td>
+            <form method="post" th:action="@{/recipes(id=${recipe.id})}" th:object="${recipe}" >
+                <input type="submit" value="delete"/>
+            </form>
+            </td>
         </tr>
         </tbody>
     </table>
+    <form method="post" th:action="@{/recipes/add}" th:object="${recipe}">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="Name">Name: </label>
+            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="Complexity">Complexity: </label>
+            <input required  th:field="*{complexity}" type="text" id="Complexity" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="CookingTime">Cooking time: </label>
+            <input required  th:field="*{cookingTime}" type="number" id="CookingTime" value="I Am Nobody"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
 </main>
 </body>
 </html>

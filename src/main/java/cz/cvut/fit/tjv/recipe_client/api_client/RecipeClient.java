@@ -85,4 +85,21 @@ public class RecipeClient {
                 .retrieve()
                 .toBodilessEntity();
     }
+
+    public Collection<RecipeDto> readByPrice(double price) {
+        return Arrays.asList(
+                Objects.requireNonNull(recipeRestClient.get()
+                        .uri("?price={recipePrice}", Map.of("recipePrice", price))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .retrieve()
+                        .toEntity(RecipeDto[].class)
+                        .getBody())
+        );
+    }
+
+    public void deleteCurrent() {
+        currentRecipeRestClient.delete()
+                .retrieve()
+                .toBodilessEntity();
+    }
 }
