@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe ingredients</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/recipes">Recipes management</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Add ingredients</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Ingredient name</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ingredient: ${allIngredients}">
+            <td th:text="${ingredient.name}">test</td>
+            <td th:text="${ingredient.price}">I Am Nobody</td>
+            <td th:object="${ingredient}">
+                <form method="post" th:action="@{/recipes/newIngredients(id=${ingredient.id})}" th:object="${ingredient}" >
+                    <input type="submit"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

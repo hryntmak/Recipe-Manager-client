@@ -11,48 +11,37 @@ import org.springframework.web.client.RestClient;
 import java.util.*;
 
 @Component
-public class RecipeClient {
+public class IngredientClient {
     private String baseUrl;
     private RestClient recipeRestClient;
     private RestClient currentRecipeRestClient;
 
-    public RecipeClient(@Value("${api.url}") String baseUrl) {
+    public IngredientClient(@Value("${api.url}") String baseUrl) {
         this.baseUrl = baseUrl;
-        recipeRestClient = RestClient.create(baseUrl + "/recipes");
+        recipeRestClient = RestClient.create(baseUrl + "/ingredients");
     }
 
     public void setCurrentRecipe(long id) {
         currentRecipeRestClient = RestClient.builder()
-                .baseUrl(baseUrl + "/recipes/{idRecipe}")
-                .defaultUriVariables(Map.of("idRecipe", id))
+                .baseUrl(baseUrl + "/ingredients/{id}")
+                .defaultUriVariables(Map.of("id", id))
                 .build();
     }
 
-    public Optional<RecipeDto> readOne() {
+    public Optional<IngredientDto> readOne() {
         try {
             return Optional.ofNullable(
                     currentRecipeRestClient.get()
-                            .retrieve().toEntity(RecipeDto.class).getBody()
+                            .retrieve().toEntity(IngredientDto.class).getBody()
             );
         } catch (HttpClientErrorException.NotFound e) {
             return Optional.empty();
         }
     }
 
-    public Collection<RecipeDto> readAll() {
+    public Collection<IngredientDto> readAll() {
         return Arrays.asList(
                 Objects.requireNonNull(recipeRestClient.get()
-                        .accept(MediaType.APPLICATION_JSON)
-                        .retrieve()
-                        .toEntity(RecipeDto[].class)
-                        .getBody())
-        );
-    }
-
-    public Collection<IngredientDto> readRecipeIngredients(long id) {
-        return Arrays.asList(
-                Objects.requireNonNull(currentRecipeRestClient.get()
-                                .uri("/ingredients")
                         .accept(MediaType.APPLICATION_JSON)
                         .retrieve()
                         .toEntity(IngredientDto[].class)
@@ -60,7 +49,7 @@ public class RecipeClient {
         );
     }
 
-    public void create(RecipeDto data) {
+    public void create(IngredientDto data) {
         recipeRestClient.post()
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -69,17 +58,8 @@ public class RecipeClient {
                 .toBodilessEntity();
     }
 
-    public void update(RecipeDto formData) {
+    public void update(IngredientDto formData) {
         currentRecipeRestClient.put()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(formData)
-                .retrieve()
-                .toBodilessEntity();
-    }
-
-    public void addIngredient(IngredientDto formData) {
-        currentRecipeRestClient.put()
-                .uri("/ingredients/{idIngredient}", Map.of("idIngredient", formData.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(formData)
                 .retrieve()

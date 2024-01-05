@@ -4,6 +4,7 @@ public class DishDto {
     private Long id;
     private String name;
 
+    private String cuisine;
     public Long getId() {
         return id;
     }
@@ -28,5 +29,4 @@ public class DishDto {
         this.cuisine = cuisine;
     }
 
-    private String cuisine;
 }

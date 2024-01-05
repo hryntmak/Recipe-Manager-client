@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.recipe_client.service;
 
 import cz.cvut.fit.tjv.recipe_client.api_client.RecipeClient;
+import cz.cvut.fit.tjv.recipe_client.model.IngredientDto;
 import cz.cvut.fit.tjv.recipe_client.model.RecipeDto;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class RecipeService {
     public Collection<RecipeDto> readAll() {
         return recipeClient.readAll();
     }
+    public Collection<IngredientDto> readRecipeIngredients(long id) {
+        return recipeClient.readRecipeIngredients(id);
+    }
 
     public void create(RecipeDto data) {
         recipeClient.create(data);
@@ -40,6 +44,10 @@ public class RecipeService {
 
     public void update(RecipeDto formData) {
         recipeClient.update(formData);
+    }
+
+    public void addIngredientToRecipe(IngredientDto formData) {
+        recipeClient.addIngredient(formData);
     }
 
 //    public long createPostForCurrentUser(PostDto data) {

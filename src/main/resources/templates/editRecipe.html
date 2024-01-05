@@ -17,8 +17,14 @@
             <label for="Name">Name: </label>
             <input th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
         </div>
-        <input type="hidden" th:field="*{complexity}"/>
-        <input type="hidden" th:field="*{cooking_time}"/>
+        <div>
+            <label for="Complexity">Complexity: </label>
+            <input th:field="*{complexity}" type="text" id="Complexity" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="CookingTime">Cooking time: </label>
+            <input th:field="*{cookingTime}" type="number" id="CookingTime" value="I Am Nobody"/>
+        </div>
         <input type="submit"/><input type="reset"/>
     </form>
 </main>
