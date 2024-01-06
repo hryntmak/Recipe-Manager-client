@@ -68,4 +68,8 @@ public class RecipeService {
     public void deleteCurrent() {
         recipeClient.deleteCurrent();
     }
+
+    public void deleteIngredientFromCurrent(long id) {
+        recipeClient.deleteIngredientFromCurrent(id);
+    }
 }

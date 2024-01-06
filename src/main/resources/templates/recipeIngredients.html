@@ -27,6 +27,11 @@
         <tr th:each="ingredient: ${allIngredients}">
             <td th:text="${ingredient.name}">test</td>
             <td th:text="${ingredient.price}">I Am Nobody</td>
+            <td>
+                <form method="post" th:action="@{/recipes/ingredients(id=${ingredient.id})}" th:object="${ingredient}" >
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -42,9 +42,9 @@
             <td><a href="#" th:href="@{/recipes/ingredients(id=${recipe.id})}">ingredients</a></td>
             <td><a href="#" th:href="@{/recipes/edit(id=${recipe.id})}">edit</a></td>
             <td>
-            <form method="post" th:action="@{/recipes(id=${recipe.id})}" th:object="${recipe}" >
-                <input type="submit" value="delete"/>
-            </form>
+                <form method="post" th:action="@{/recipes(id=${recipe.id})}" th:object="${recipe}" >
+                    <input type="submit" value="delete"/>
+                </form>
             </td>
         </tr>
         </tbody>

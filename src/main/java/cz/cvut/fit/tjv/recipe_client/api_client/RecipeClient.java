@@ -87,6 +87,13 @@ public class RecipeClient {
                 .toBodilessEntity();
     }
 
+    public void deleteIngredientFromCurrent(long id) {
+        currentRecipeRestClient.delete()
+                .uri("/ingredients/{idIngredient}", Map.of("idIngredient", id))
+                .retrieve()
+                .toBodilessEntity();
+    }
+
     public Collection<RecipeDto> readByPrice(double price) {
         return Arrays.asList(
                 Objects.requireNonNull(recipeRestClient.get()

@@ -99,6 +99,16 @@ public class RecipeController {
         return "recipeIngredients";
     }
 
+    @PostMapping("/ingredients")
+    public String deleteIngredient(Model model, @RequestParam long id) {
+        recipeService.deleteIngredientFromCurrent(id);
+        var currIngredients = recipeService.readRecipeIngredients(id);
+        model.addAttribute("allIngredients", currIngredients);
+        var currRecipe = recipeService.readOne().get();
+        model.addAttribute("recipe", currRecipe);
+        return "recipeIngredients";
+    }
+
     @GetMapping("/newIngredients")
     public String showAddIngredients(Model model, @RequestParam long id) {
         recipeService.setCurrentRecipe(id);
@@ -114,10 +124,14 @@ public class RecipeController {
         try {
             formData.setId(id);
             recipeService.addIngredientToRecipe(formData);
+            var allIngredients = ingredientService.readAll();
+            model.addAttribute("allIngredients", allIngredients);
+            var currRecipe = recipeService.readOne().get();
+            model.addAttribute("recipe", currRecipe);
         } catch (HttpClientErrorException.NotFound e) {
             model.addAttribute("error", true);
         }
-        return list(model, Optional.empty());
+        return "addIngredientsToRecipe";
     }
 
     @GetMapping("/changeDish")
@@ -125,8 +139,6 @@ public class RecipeController {
         recipeService.setCurrentRecipe(id);
         var allDishes = dishService.readAll();
         model.addAttribute("allDishes", allDishes);
-//        var currRecipe = recipeService.readOne().get();
-//        model.addAttribute("recipe", currRecipe);
         return "changeDish";
     }
 

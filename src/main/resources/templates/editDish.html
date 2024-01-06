@@ -12,7 +12,7 @@
     <a href="/dishes">Dishes management</a>
 </nav>
 <main>
-    <h1>Edit user</h1>
+    <h1>Edit dish</h1>
     <form method="post" th:action="@{/dishes/edit}" th:object="${dish}">
         <input type="hidden" th:field="*{id}"/>
         <div>
@@ -20,7 +20,7 @@
             <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
         </div>
         <div>
-            <label for="Cuisine">Complexity: </label>
+            <label for="Cuisine">Cuisine: </label>
             <input required  th:field="*{cuisine}" type="text" id="Cuisine" value="I Am Nobody"/>
         </div>
         <input type="submit"/><input type="reset"/>
