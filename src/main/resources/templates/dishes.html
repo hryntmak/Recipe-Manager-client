@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dishes</title>
 </head>
 <body>
-
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/recipes">Recipes management</a>
+    <a href="/ingredients">Ingredients management</a>
+    <a href="/dishes">Dishes management</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Dishes management</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Dish name</th>
+                <th>Cuisine</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dish: ${allDishes}">
+            <td th:text="${dish.name}">test</td>
+            <td th:text="${dish.cuisine}">I Am Nobody</td>
+            <td><a href="#" th:href="@{/dishes/edit(id=${dish.id})}">edit</a></td>
+            <td>
+                <form method="post" th:action="@{/dishes(id=${dish.id})}" th:object="${dish}" >
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form method="post" th:action="@{/dishes/add}" th:object="${dish}">
+        <div>
+            <label for="Name">Name: </label>
+            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="Cuisine">Cuisine: </label>
+            <input required  th:field="*{cuisine}" type="text" id="Cuisine" value="I Am Nobody"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
+</main>
 </body>
 </html>

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Recipes</title>
 </head>
 <body>
-
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/recipes">Recipe management</a>
+    <a href="/ingredients">Ingredients management</a>
+    <a href="/dishes">Dishes management</a>
+</nav>
+<main>
+    <h1>Edit user</h1>
+    <form method="post" th:action="@{/dishes/edit}" th:object="${dish}">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="Name">Name: </label>
+            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="Cuisine">Complexity: </label>
+            <input required  th:field="*{cuisine}" type="text" id="Cuisine" value="I Am Nobody"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
+</main>
 </body>
 </html>

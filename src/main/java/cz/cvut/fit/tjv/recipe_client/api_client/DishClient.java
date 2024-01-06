@@ -24,7 +24,7 @@ public class DishClient {
 
     public void setCurrentDish(long id) {
         currentDishRestClient = RestClient.builder()
-                .baseUrl(baseUrl + "/recipes/{idDish}")
+                .baseUrl(baseUrl + "/dishes/{idDish}")
                 .defaultUriVariables(Map.of("idDish", id))
                 .build();
     }

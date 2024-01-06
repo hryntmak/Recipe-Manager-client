@@ -1,5 +1,6 @@
 package cz.cvut.fit.tjv.recipe_client.api_client;
 
+import cz.cvut.fit.tjv.recipe_client.model.DishDto;
 import cz.cvut.fit.tjv.recipe_client.model.IngredientDto;
 import cz.cvut.fit.tjv.recipe_client.model.RecipeDto;
 import org.springframework.beans.factory.annotation.Value;

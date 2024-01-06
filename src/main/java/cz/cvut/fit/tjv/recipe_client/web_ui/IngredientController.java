@@ -1,7 +1,7 @@
 package cz.cvut.fit.tjv.recipe_client.web_ui;
 
+import cz.cvut.fit.tjv.recipe_client.model.DishDto;
 import cz.cvut.fit.tjv.recipe_client.model.IngredientDto;
-import cz.cvut.fit.tjv.recipe_client.model.RecipeDto;
 import cz.cvut.fit.tjv.recipe_client.service.IngredientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +21,31 @@ public class IngredientController {
     public String list(Model model) {
         var all = ingredientService.readAll();
         model.addAttribute("allIngredients", all);
+        model.addAttribute("ingredient", new IngredientDto());
         return "ingredients";
+    }
+
+
+    @PostMapping
+    public String delete(Model model, @RequestParam long id) {
+        ingredientService.setCurrentIngredient(id);
+        ingredientService.deleteCurrent();
+        model.addAttribute("allIngredients", ingredientService.readAll());
+        model.addAttribute("ingredient", new IngredientDto());
+        return "ingredients";
+    }
+
+    @PostMapping("/add")
+    public String create(@ModelAttribute IngredientDto formData, Model model) {
+        ingredientService.create(formData);
+        return list(model);
     }
 
     @GetMapping("/edit")
     public String showForm(Model model, @RequestParam long id) {
         ingredientService.setCurrentIngredient(id);
-        var currRecipe = ingredientService.readOne().get();
-        model.addAttribute("ingredient", currRecipe);
+        var currDish = ingredientService.readOne().get();
+        model.addAttribute("ingredient", currDish);
         return "editIngredient";
     }
 

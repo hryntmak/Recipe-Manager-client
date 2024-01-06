@@ -22,7 +22,7 @@ public class IngredientService {
 
     public void setCurrentIngredient(long id) {
         this.currentIngredient = id;
-        ingredientClient.setCurrentRecipe(id);
+        ingredientClient.setCurrentIngredient(id);
     }
 
     public Optional<IngredientDto> readOne() {
@@ -42,15 +42,7 @@ public class IngredientService {
         ingredientClient.update(formData);
     }
 
-//    public long createPostForCurrentUser(PostDto data) {
-//        var myPosts = postClient.readByAuthor(currentUser); //1st request
-//
-//        if (myPosts.size() > 3) //business logic decision
-//            throw new FreePostLimitExceededException();
-//
-//        data.setAuthor(userClient.readOne().get());
-//
-//        userClient.createMyPost(data); //2nd request
-//    }
-
+    public void deleteCurrent() {
+        ingredientClient.deleteCurrent();
+    }
 }

@@ -1,7 +1,9 @@
 package cz.cvut.fit.tjv.recipe_client.web_ui;
 
+import cz.cvut.fit.tjv.recipe_client.model.DishDto;
 import cz.cvut.fit.tjv.recipe_client.model.IngredientDto;
 import cz.cvut.fit.tjv.recipe_client.model.RecipeDto;
+import cz.cvut.fit.tjv.recipe_client.service.DishService;
 import cz.cvut.fit.tjv.recipe_client.service.IngredientService;
 import cz.cvut.fit.tjv.recipe_client.service.RecipeService;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class RecipeController {
     private RecipeService recipeService;
     private IngredientService ingredientService;
+    private DishService dishService;
 
-    public RecipeController(RecipeService recipeService, IngredientService ingredientService) {
+    public RecipeController(RecipeService recipeService, IngredientService ingredientService, DishService dishService) {
         this.recipeService = recipeService;
         this.ingredientService = ingredientService;
+        this.dishService = dishService;
     }
 
     @GetMapping
@@ -116,4 +120,26 @@ public class RecipeController {
         return list(model, Optional.empty());
     }
 
+    @GetMapping("/changeDish")
+    public String changeDish(Model model, @RequestParam long id) {
+        recipeService.setCurrentRecipe(id);
+        var allDishes = dishService.readAll();
+        model.addAttribute("allDishes", allDishes);
+//        var currRecipe = recipeService.readOne().get();
+//        model.addAttribute("recipe", currRecipe);
+        return "changeDish";
+    }
+
+    @PostMapping("/changeDish")
+    public String submitChangeDish(@ModelAttribute DishDto formData, Model model, @RequestParam long id) {
+        try {
+            formData.setId(id);
+            RecipeDto recipe = recipeService.readOne().get();
+            recipe.setDish(formData);
+            recipeService.update(recipe);
+        } catch (HttpClientErrorException.NotFound e) {
+            model.addAttribute("error", true);
+        }
+        return list(model, Optional.empty());
+    }
 }

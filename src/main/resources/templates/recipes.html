@@ -50,7 +50,6 @@
         </tbody>
     </table>
     <form method="post" th:action="@{/recipes/add}" th:object="${recipe}">
-        <input type="hidden" th:field="*{id}"/>
         <div>
             <label for="Name">Name: </label>
             <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>

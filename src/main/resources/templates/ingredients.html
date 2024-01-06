@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe ingredients</title>
+    <title>Ingredients</title>
 </head>
 <body>
 <nav>
@@ -18,18 +18,35 @@
     <h1>Ingredients</h1>
     <table>
         <thead>
-        <tr>
-            <th>Ingredient name</th>
-            <th>Price</th>
-        </tr>
+            <tr>
+                <th>Ingredient name</th>
+                <th>Price</th>
+            </tr>
         </thead>
         <tbody>
         <tr th:each="ingredient: ${allIngredients}">
             <td th:text="${ingredient.name}">test</td>
             <td th:text="${ingredient.price}">I Am Nobody</td>
+            <td><a href="#" th:href="@{/ingredients/edit(id=${ingredient.id})}">edit</a></td>
+            <td>
+                <form method="post" th:action="@{/ingredients(id=${ingredient.id})}" th:object="${ingredient}" >
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
+    <form method="post" th:action="@{/ingredients/add}" th:object="${ingredient}">
+        <div>
+            <label for="Name">Name: </label>
+            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+        </div>
+        <div>
+            <label for="Price">Price: </label>
+            <input required  th:field="*{price}" type="text" id="Price" value="I Am Nobody"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
 </main>
 </body>
 </html>

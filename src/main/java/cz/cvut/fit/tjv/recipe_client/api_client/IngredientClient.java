@@ -1,7 +1,6 @@
 package cz.cvut.fit.tjv.recipe_client.api_client;
 
 import cz.cvut.fit.tjv.recipe_client.model.IngredientDto;
-import cz.cvut.fit.tjv.recipe_client.model.RecipeDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -13,16 +12,16 @@ import java.util.*;
 @Component
 public class IngredientClient {
     private String baseUrl;
-    private RestClient recipeRestClient;
-    private RestClient currentRecipeRestClient;
+    private RestClient ingredientRestClient;
+    private RestClient currentIngredientRestClient;
 
     public IngredientClient(@Value("${api.url}") String baseUrl) {
         this.baseUrl = baseUrl;
-        recipeRestClient = RestClient.create(baseUrl + "/ingredients");
+        ingredientRestClient = RestClient.create(baseUrl + "/ingredients");
     }
 
-    public void setCurrentRecipe(long id) {
-        currentRecipeRestClient = RestClient.builder()
+    public void setCurrentIngredient(long id) {
+        currentIngredientRestClient = RestClient.builder()
                 .baseUrl(baseUrl + "/ingredients/{id}")
                 .defaultUriVariables(Map.of("id", id))
                 .build();
@@ -31,7 +30,7 @@ public class IngredientClient {
     public Optional<IngredientDto> readOne() {
         try {
             return Optional.ofNullable(
-                    currentRecipeRestClient.get()
+                    currentIngredientRestClient.get()
                             .retrieve().toEntity(IngredientDto.class).getBody()
             );
         } catch (HttpClientErrorException.NotFound e) {
@@ -41,7 +40,7 @@ public class IngredientClient {
 
     public Collection<IngredientDto> readAll() {
         return Arrays.asList(
-                Objects.requireNonNull(recipeRestClient.get()
+                Objects.requireNonNull(ingredientRestClient.get()
                         .accept(MediaType.APPLICATION_JSON)
                         .retrieve()
                         .toEntity(IngredientDto[].class)
@@ -50,7 +49,7 @@ public class IngredientClient {
     }
 
     public void create(IngredientDto data) {
-        recipeRestClient.post()
+        ingredientRestClient.post()
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(data)
@@ -59,9 +58,15 @@ public class IngredientClient {
     }
 
     public void update(IngredientDto formData) {
-        currentRecipeRestClient.put()
+        currentIngredientRestClient.put()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(formData)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void deleteCurrent() {
+        currentIngredientRestClient.delete()
                 .retrieve()
                 .toBodilessEntity();
     }
