@@ -7,12 +7,12 @@
 <body>
 <nav>
     <a href="/">Welcome</a> |
-    <a href="/recipes">Recipe management</a>
-    <a href="/ingredients">Ingredients management</a>
-    <a href="/dishes">Dishes management</a>
+    <a href="/recipes">Recipes</a> |
+    <a href="/ingredients">Ingredients</a> |
+    <a href="/dishes">Dishes</a>
 </nav>
 <main>
-    <h1>Edit user</h1>
+    <h1>Edit recipe</h1>
     <form method="post" th:action="@{/recipes/edit}" th:object="${recipe}">
         <input type="hidden" th:field="*{id}"/>
         <div>
@@ -20,8 +20,23 @@
             <input th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
         </div>
         <div>
-            <label for="Complexity">Complexity: </label>
-            <input th:field="*{complexity}" type="text" id="Complexity" value="I Am Nobody"/>
+            <h5>Complexity: </h5>
+            <div>
+                <ul>
+                    <li>
+                        <input required id="LOW" type="radio" th:field="*{complexity}" value="LOW"/>
+                        <label for="LOW">LOW</label>
+                    </li>
+                    <li>
+                        <input required id="MEDIUM" type="radio" th:field="*{complexity}" value="MEDIUM" />
+                        <label for="MEDIUM">MEDIUM</label>
+                    </li>
+                    <li>
+                        <input required id="HIGH" type="radio" th:field="*{complexity}" value="HIGH" />
+                        <label for="HIGH">HIGH</label>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div>
             <label for="CookingTime">Cooking time: </label>

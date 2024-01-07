@@ -7,15 +7,15 @@
 <body>
 <nav>
     <a href="/">Welcome</a> |
-    <a href="/recipes">Recipes management</a>
-    <a href="/ingredients">Ingredients management</a>
-    <a href="/dishes">Dishes management</a>
+    <a href="/recipes">Recipes</a> |
+    <a href="/ingredients">Ingredients</a> |
+    <a href="/dishes">Dishes</a>
 </nav>
 <main>
     <div th:if="${error}">
         <span>ERROR</span>
     </div>
-    <h1>User management</h1>
+    <h1>Recipes management</h1>
     <form method="get" th:action="@{/recipes(price=${recipePrice.price})}">
         <div>
             <label for="Price">Show recipes with price lower than: </label>
@@ -55,8 +55,21 @@
             <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
         </div>
         <div>
-            <label for="Complexity">Complexity: </label>
-            <input required  th:field="*{complexity}" type="text" id="Complexity" value="I Am Nobody"/>
+            <h5>Complexity:</h5>
+            <ul>
+                <li>
+                    <input required id="LOW" type="radio" th:field="*{complexity}" value="LOW"/>
+                    <label for="LOW">LOW</label>
+                </li>
+                <li>
+                    <input required id="MEDIUM" type="radio" th:field="*{complexity}" value="MEDIUM" />
+                    <label for="MEDIUM">MEDIUM</label>
+                </li>
+                <li>
+                    <input required id="HIGH" type="radio" th:field="*{complexity}" value="HIGH" />
+                    <label for="HIGH">HIGH</label>
+                </li>
+            </ul>
         </div>
         <div>
             <label for="CookingTime">Cooking time: </label>
