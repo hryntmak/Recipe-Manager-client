@@ -2,29 +2,112 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .recipe-card {
+            padding: 1.25em 1.5em;
+        }
+        .recipe-card ul {
+            list-style: none;
+            margin: 1.5em 0 0;
+            padding: 0;
+        }
+        .recipe-card ul li {
+            display: inline-block;
+            margin-left: 2em;
+            line-height: 1em;
+        }
+        .recipe-card ul li:first-child {
+            margin-left: 0;
+        }
+        .recipe-card ul li .icon {
+            vertical-align: bottom;
+        }
+        .recipe-card ul li span {
+            margin-left: 0.5em;
+            font-size: 1em;
+            font-weight: 300;
+            vertical-align: middle;
+            color: #838689;
+        }
+        .recipe-card ul li span:first-child {
+            margin-left: 0;
+        }
+        .recipe-card h2, .recipe-card h3 {
+            margin: 0;
+            font-weight: 300;
+        }
+        .recipe-card h2 {
+            font-size: 1.75em;
+            color: #222222;
+        }
+        .recipe-card h3 {
+            font-size: 0.9375em;
+            color: #838689;
+        }
+
+        .recipe-card .icon {
+            display: inline-block;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/recipe-card-icons.svg);
+            background-repeat: no-repeat;
+        }
+        .recipe-card .icon-clock, .recipe-card .icon-clock\:regular {
+            background-position: 0 -19px;
+            width: 20px;
+            height: 20px;
+        }
+        .recipe-card .icon-level, .recipe-card .icon-level\:regular {
+            background-position: 0 -39px;
+            width: 16px;
+            height: 19px;
+        }
+    </style>
 </head>
-<body>
-<nav>
-    <a href="/">Welcome</a> |
-    <a href="/recipes">Recipes</a> |
-    <a href="/ingredients">Ingredients</a> |
-    <a href="/dishes">Dishes</a>
+<body class="text-light bg-info">
+<nav class="navbar navbar-light px-3 bg-primary">
+    <a class="navbar-brand text-light" href="/">Recipe manager</a>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/recipes">Recipes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/ingredients">Ingredients</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/dishes">Dishes</a>
+        </li>
+    </ul>
 </nav>
-<main>
-    <h1>Edit dish</h1>
-    <form method="post" th:action="@{/ingredients/edit}" th:object="${ingredient}">
+
+<main class="container mt-3" style="min-height: 76vh;">
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1 class="title p-2 mb-4">Ingredients editor</h1>
+
+    <form class="mt-5 mb-5" method="post" th:action="@{/ingredients/edit}" th:object="${ingredient}">
         <input type="hidden" th:field="*{id}"/>
-        <div>
-            <label for="Name">Name: </label>
-            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+        <div class="mb-2">
+            <label class="form-label h5" for="Name">Name: </label>
+            <input required th:field="*{name}" class="form-control w-auto" type="text" id="Name" value="I Am Nobody"/>
         </div>
-        <div>
-            <label for="Price">Price: </label>
-            <input required  th:field="*{price}" type="number" id="Price" value="I Am Nobody"/>
+        <div class="mb-4">
+            <label class="form-label h5" for="Price">Price: </label>
+            <input required  th:field="*{price}" class="form-control w-auto" type="number" step="0.01" id="Price" value="I Am Nobody"/>
         </div>
-        <input type="submit"/><input type="reset"/>
+        <input class="btn btn-primary" type="submit"/><input class="btn btn-primary mx-2" type="reset"/>
     </form>
 </main>
+<footer class="bg-body-tertiary text-center text-lg-start bg-primary mt-5">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-body" href="https://mdbootstrap.com/">Maksim Hryntsevich</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

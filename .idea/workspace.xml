@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78bd9a13-94c5-4420-8889-1ebf4051719b" name="Changes" comment="Realize crud for ingredients and dishes&#10;Add business operation">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addIngredientsToRecipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addIngredientsToRecipe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/changeDish.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/changeDish.html" afterDir="false" />
@@ -77,7 +75,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/home/hryntmak/linux-home/BI_TJV_semestral_work_client",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/bi-tjv_semestral_work_client/src/main/resources/templates",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,6 +83,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "spring.configuration.checksum": "097cf57e013b86fb853ed5b5b89f241f",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -92,21 +91,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\bi-tjv_semestral_work_client\src\main\resources\templates" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\bi-tjv_semestral_work_client\src\main\resources\static" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="BI_TJV_semestral_work_client" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="BI_TJV_semestral_work_client" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RecipeWebMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="bi-tjv_semestral_work_client.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cz.cvut.fit.tjv.recipe_client.RecipeWebMain" />
@@ -135,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703784587459</updated>
       <workItem from="1703784588742" duration="54828000" />
-      <workItem from="1704639864664" duration="1630000" />
+      <workItem from="1708535440330" duration="24747000" />
     </task>
     <task id="LOCAL-00001" summary="Add functional recipes page and edit of recipe.">
       <option name="closed" value="true" />

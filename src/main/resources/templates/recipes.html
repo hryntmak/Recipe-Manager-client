@@ -2,81 +2,158 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recipes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .recipe-card {
+            padding: 1.25em 1.5em;
+        }
+        .recipe-card ul {
+            list-style: none;
+            margin: 1.5em 0 0;
+            padding: 0;
+        }
+        .recipe-card ul li {
+            display: inline-block;
+            margin-left: 2em;
+            line-height: 1em;
+        }
+        .recipe-card ul li:first-child {
+            margin-left: 0;
+        }
+        .recipe-card ul li .icon {
+            vertical-align: bottom;
+        }
+        .recipe-card ul li span {
+            margin-left: 0.5em;
+            font-size: 1em;
+            font-weight: 300;
+            vertical-align: middle;
+            color: #838689;
+        }
+        .recipe-card ul li span:first-child {
+            margin-left: 0;
+        }
+        .recipe-card h2, .recipe-card h3 {
+            margin: 0;
+            font-weight: 300;
+        }
+        .recipe-card h2 {
+            font-size: 1.75em;
+            color: #222222;
+        }
+        .recipe-card h3 {
+            font-size: 0.9375em;
+            color: #838689;
+        }
+
+        .recipe-card .icon {
+            display: inline-block;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/recipe-card-icons.svg);
+            background-repeat: no-repeat;
+        }
+        .recipe-card .icon-clock, .recipe-card .icon-clock\:regular {
+            background-position: 0 -19px;
+            width: 20px;
+            height: 20px;
+        }
+        .recipe-card .icon-level, .recipe-card .icon-level\:regular {
+            background-position: 0 -39px;
+            width: 16px;
+            height: 19px;
+        }
+    </style>
 </head>
-<body>
-<nav>
-    <a href="/">Welcome</a> |
-    <a href="/recipes">Recipes</a> |
-    <a href="/ingredients">Ingredients</a> |
-    <a href="/dishes">Dishes</a>
+<body class="text-light bg-info">
+<nav class="navbar navbar-light px-3 bg-primary">
+    <a class="navbar-brand text-light" href="/">Recipe manager</a>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/recipes">Recipes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/ingredients">Ingredients</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="/dishes">Dishes</a>
+        </li>
+    </ul>
 </nav>
-<main>
+<main class="container mt-3" style="min-height: 76vh;">
     <div th:if="${error}">
         <span>ERROR</span>
     </div>
-    <h1>Recipes management</h1>
-    <form method="get" th:action="@{/recipes(price=${recipePrice.price})}">
-        <div>
-            <label for="Price">Show recipes with price lower than: </label>
-            <input th:field="*{recipePrice.price}" type="number" id="Price" value="I Am Nobody"/>
+    <h1 class="title p-2 ">Recipes management</h1>
+    <form class="mb-5 mt-3 p-2 row g-3" method="get" th:action="@{/recipes(price=${recipePrice.price})}">
+        <label for="Price" class="form-label">Show recipes with price lower than: </label>
+        <div class="col-auto">
+            <input th:field="*{recipePrice.price}" class="form-control" type="number" id="Price" value="I Am Nobody"/>
         </div>
-        <input type="submit" value="Show recipes"/>
+        <input type="submit" class="btn btn-primary col-auto" value="Show recipes"/>
     </form>
-    <table>
-        <thead>
-        <tr>
-            <th>Recipe name</th>
-            <th>Complexity</th>
-            <th>Cooking time</th>
-            <th>Dish</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="recipe: ${allRecipes}">
-            <td th:text="${recipe.name}">test</td>
-            <td th:text="${recipe.complexity}">I Am Nobody</td>
-            <td th:text="${recipe.cookingTime}">I Am Nobody</td>
-            <td th:if="${recipe.getDish()} != null" th:text="${recipe.getDish().name}">I Am Nobody</td>
-            <td th:if="${recipe.getDish()} == null"></td>
-            <td><a href="#" th:href="@{/recipes/ingredients(id=${recipe.id})}">ingredients</a></td>
-            <td><a href="#" th:href="@{/recipes/edit(id=${recipe.id})}">edit</a></td>
-            <td>
-                <form method="post" th:action="@{/recipes(id=${recipe.id})}" th:object="${recipe}" >
-                    <input type="submit" value="delete"/>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <form method="post" th:action="@{/recipes/add}" th:object="${recipe}">
-        <div>
-            <label for="Name">Name: </label>
-            <input required th:field="*{name}" type="text" id="Name" value="I Am Nobody"/>
+
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-12 col-md-6 col-lg-4" th:each="recipe: ${allRecipes}">
+                <div class="border text-body rounded bg-light recipe-card">
+                    <h2 th:text="${recipe.name}">test</h2>
+                    <h3 th:if="${recipe.getDish()} != null" th:text="${recipe.getDish().name}">I Am Nobody</h3>
+                    <h3 style="opacity: 0;" th:if="${recipe.getDish()} == null">Nothing</h3>
+                    <ul>
+                        <li><span class="icon icon-clock" ></span><span th:text="${recipe.cookingTime}">15</span><span>min</span></li>
+                        <li><span class="icon icon-level"></span><span th:text="${recipe.complexity}">Beginner level</span></li>
+                    </ul>
+                    <div class="buttons-wrapper d-flex justify-content-between mt-4">
+                        <a href="#" class="btn-link" style="padding: 0.375rem 0;" th:href="@{/recipes/ingredients(id=${recipe.id})}">ingredients</a>
+                        <a  href="#" class="btn-link" style="padding: 0.375rem 0;" th:href="@{/recipes/edit(id=${recipe.id})}">edit</a>
+                        <form method="post" th:action="@{/recipes(id=${recipe.id})}" th:object="${recipe}" >
+                            <input th:id="${recipe.id}" type="submit" value="delete" hidden/>
+                            <label th:for="${recipe.id}" class="btn btn-primary mx-auto">Delete</label>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <h5>Complexity:</h5>
-            <ul>
-                <li>
-                    <input required id="LOW" type="radio" th:field="*{complexity}" value="LOW"/>
-                    <label for="LOW">LOW</label>
-                </li>
-                <li>
-                    <input required id="MEDIUM" type="radio" th:field="*{complexity}" value="MEDIUM" />
-                    <label for="MEDIUM">MEDIUM</label>
-                </li>
-                <li>
-                    <input required id="HIGH" type="radio" th:field="*{complexity}" value="HIGH" />
-                    <label for="HIGH">HIGH</label>
-                </li>
-            </ul>
+    </div>
+
+    <form class="mt-5 mb-5" method="post" th:action="@{/recipes/add}" th:object="${recipe}">
+        <div class="mb-2">
+            <label class="form-label h5" for="Name">Name: </label>
+            <input required th:field="*{name}" class="form-control w-auto" type="text" id="Name" value="I Am Nobody"/>
         </div>
-        <div>
-            <label for="CookingTime">Cooking time: </label>
-            <input required  th:field="*{cookingTime}" type="number" id="CookingTime" value="I Am Nobody"/>
+        <div class="mb-2">
+            <label class="form-label h5" for="CookingTime">Cooking time: </label>
+            <input required  th:field="*{cookingTime}" class="form-control w-auto" type="number" id="CookingTime" value="I Am Nobody"/>
         </div>
-        <input type="submit"/><input type="reset"/>
+        <div class="mb-3">
+            <h5 class="form-label">Complexity:</h5>
+            <div>
+                <div class="form-check">
+                    <input required id="LOW" class="form-check-input" type="radio" th:field="*{complexity}" value="LOW"/>
+                    <label class="form-check-label" for="LOW">LOW</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" required id="MEDIUM" type="radio" th:field="*{complexity}" value="MEDIUM" />
+                    <label class="form-check-label" for="MEDIUM">MEDIUM</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" required id="HIGH" type="radio" th:field="*{complexity}" value="HIGH" />
+                    <label class="form-check-label" for="HIGH">HIGH</label>
+                </div>
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit"/><input class="btn btn-primary mx-2" type="reset"/>
     </form>
 </main>
+<footer class="footer bg-body-tertiary text-center text-lg-start bg-primary mt-5">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-body" href="https://mdbootstrap.com/">Maksim Hryntsevich</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
